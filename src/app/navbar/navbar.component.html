@@ -1,0 +1,21 @@
+<nav class="navbar sticky-top navbar-expand yellow-bg">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link text-white font-weight-bold" [routerLink]="['']" routerLinkActive="router-link-active"
+                [routerLinkActiveOptions]="{exact:true}" (click)="window.location.reload()">HOME</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-white" [routerLink]="['/favourite']"
+                routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact:true}">FAVOURITE</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid yellow-bg">
+    <div class="row">
+        <div class="col-sm-12 text-center py-2">
+            <h1 class="text-white font-weight-bold text-shadow">The Beer Bank</h1>
+            <p class="text-white">Find your favorite beer here</p>
+        </div>
+    </div>
+</div>

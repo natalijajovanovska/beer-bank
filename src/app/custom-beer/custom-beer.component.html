@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Not seeing anything you like?</h1>
+            <h2>Add your custom beer here!</h2>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-8 col-sm-12">
+            <div class="form-group">
+                <input type="text" class="form-control" id="customBeer" #newBeer>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <button (click)="addCustomBeer(newBeer.value); newBeer.value=''" class="btn btn-success btn-block">Add Custom Beer</button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <div *ngFor="let item of customBeer; let ind = index" class="alert alert-secondary text-center">
+                <h2 class="font-weight-bold ">Beer Name: <span class="title-custom">{{item}}</span></h2>
+                <button (click)="deleteCustomBeer(ind)" class="btn btn-danger my-3">Delete Custom Beer</button>
+            </div>
+        </div>
+    </div>
+</div>
