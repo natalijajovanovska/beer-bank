@@ -9,17 +9,15 @@ import { Beer } from "../config/beer";
 })
 export class BodyComponent implements OnInit {
 
-  @Input() component: number; 
+  @Input() component: number;
 
   loading = false;
-
   public beers: Beer[] = [];
-
   private page: number = 1;
   private name: string;
-  private finished: boolean = false; 
+  public searchedText = "";
+  private finished: boolean = false;
   private search: boolean = false;
-
   private lsKey: string = 'FavBeers';
   private imgRoute: string = '../../../assets/img/';
   private imgStar: string = 'star.png';
@@ -50,12 +48,30 @@ export class BodyComponent implements OnInit {
       });
   }
 
+
+ getSearch(event: KeyboardEvent) {
+    if (event.type === 'keyup') {
+      this.search = true;
+      if (this.searchedText) {
+        this.beerService.getBeersByName(this.searchedText)
+          .subscribe((data) => {
+            this.beers = data;
+            this.beers.forEach(item => {
+              this.changeStar(item)})
+          })
+      } else {
+        this.finished = true;
+        this.getPage();
+      }}
+  }
+
   getBeers() {
     this.loading = true;
     this.beerService.getBeers(this.name, this.page)
       .subscribe((data) => {
         this.onSuccess(data);
-        this.loading = false;});
+        this.loading = false;
+      });
   }
 
   private getFavourites() {
@@ -64,7 +80,8 @@ export class BodyComponent implements OnInit {
     this.beerService.getFavourites(favs, this.page)
       .subscribe((data) => {
         this.onSuccess(data);
-        this.loading = false;});
+        this.loading = false;
+      });
   }
 
   onSuccess(data) {
@@ -113,7 +130,7 @@ export class BodyComponent implements OnInit {
     }
   }
 
- 
+
   selectComponent() {
     switch (this.component) {
       case 1: {
@@ -125,10 +142,6 @@ export class BodyComponent implements OnInit {
       }
       case 2: {
         this.getFavourites();
-        break;
-      }
-      case 3: {
-        //this.getFavourites();
         break;
       }
     }

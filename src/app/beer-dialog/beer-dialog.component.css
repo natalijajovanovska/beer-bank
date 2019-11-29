@@ -3,3 +3,6 @@
     background: purple;
     padding: 3px;
 }
+.card-similar img{
+    height: 150px;
+}

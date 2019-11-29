@@ -6,25 +6,29 @@
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="form-group">
                 <label for="ibuMin">Max IBU</label>
-                <input type="number" class="form-control" id="ibuMin">
+                <input type="number" class="form-control" placeholder="Enter Number" [(ngModel)]="searchedMaxIbu"
+                    (keyup)="getMaxIbu($event)">
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="form-group">
                 <label for="ibuMin">Min IBU</label>
-                <input type="number" class="form-control" id="ibuMin">
+                <input type="number" class="form-control" placeholder="Enter Number"  [(ngModel)]="searchedMinIbu"
+                (keyup)="getMinIbu($event)">
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="form-group">
                 <label for="ibuMin">Max ABV</label>
-                <input type="number" class="form-control" id="ibuMin">
+                <input type="number" class="form-control" placeholder="Enter Number"  [(ngModel)]="searchedMaxAbv"
+                (keyup)="getMaxAbv($event)">
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="form-group">
                 <label for="ibuMin">Min ABV</label>
-                <input type="number" class="form-control" id="ibuMin">
+                <input type="number" class="form-control" placeholder="Enter Number"  [(ngModel)]="searchedMinAbv"
+                (keyup)="getMinAbv($event)">
             </div>
         </div>
     </div>
@@ -32,38 +36,50 @@
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="form-group">
                 <label for="ibuMin">Max EBC</label>
-                <input type="number" class="form-control" id="ibuMin">
+                <input type="number" class="form-control" placeholder="Enter Number" [(ngModel)]="searchedMaxEbc"
+                (keyup)="getMaxEbc($event)">
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="form-group">
                 <label for="ibuMin">Min EBC</label>
-                <input type="number" class="form-control" id="ibuMin">
+                <input type="number" class="form-control" placeholder="Enter Number" [(ngModel)]="searchedMinEbc"
+                (keyup)="getMinEbc($event)">
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="form-group">
                 <label for="ibuMin">Brewed before</label>
-                <input type="number" class="form-control" id="ibuMin">
+                <input type="number" class="form-control" placeholder="Enter Date" [(ngModel)]="searchedBrewedBefore"
+                (keyup)="getBrewedBefore($event)">
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="form-group">
                 <label for="ibuMin">Brewed after</label>
-                <input type="number" class="form-control" id="ibuMin">
+                <input type="number" class="form-control" placeholder="Enter Date" [(ngModel)]="searchedBrewedAfter"
+                (keyup)="getBrewedAfter($event)">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12 text-right">
             <button class="btn btn-primary">Search</button>
+            <button class="btn btn-danger ml-3" (click)="clearNumbers()">Clear</button>
         </div>
     </div>
 </div>
 
-<div class="container mt-3">
+<div class="container">
     <div class="row">
-        <div class="col-12 text-center">
+        <app-beer-item *ngFor="let beer of beers" [beer]="beer" class="col-lg-4 col-md-6 col-sm-12 card-deck my-3">
+        </app-beer-item>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div *ngIf="!loading && beers && !beers.length" class="col-sm-12 text-center">
             <div class="alert alert-warning" role="alert">
                 No beers found
             </div>
